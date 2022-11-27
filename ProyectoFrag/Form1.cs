@@ -182,19 +182,6 @@ namespace ProyectoFrag
             }
             con.Close();
 
-            string conString = "Data Source = practicaaworks.database.windows.net; Initial Catalog = salesAW; User Id = patron; Password = Holacomoestas_123;";
-            SqlConnection con = new SqlConnection(conString);
-            con.Open();
-            string testString = "select * from Sales.SalesOrderHeader";
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(testString, con);
-            DataSet dataSet = new DataSet();
-            dataAdapter.Fill(dataSet, "Salida");
-            con.Close();
-            dataGridView1.DataSource = dataSet;
-            dataGridView1.DataMember = "Salida";
-
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
