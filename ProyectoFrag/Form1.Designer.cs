@@ -152,10 +152,9 @@
         private DataGridView dataGridView1;
         private Button button1;
         private ComboBox comboBox1;
-<<<<<<< HEAD
+
         private TextBox textBox1;
         private TextBox textBox2;
-=======
->>>>>>> 21ed72e51736e431e4a59f04b876e91d981d3cdc
+
     }
 }
