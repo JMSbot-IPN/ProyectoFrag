@@ -1,7 +1,10 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 21ed72e51736e431e4a59f04b876e91d981d3cdc
 namespace ProyectoFrag
 {
     public partial class Form1 : Form
@@ -18,6 +21,7 @@ namespace ProyectoFrag
 
         private void button1_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
 
             string conString = "Data Source = practicaaworks.database.windows.net; Initial Catalog = salesAW; User Id = patron; Password = Holacomoestas_123;";
             SqlConnection con = new SqlConnection(conString);
@@ -182,6 +186,18 @@ namespace ProyectoFrag
                 break;
             }
             con.Close();
+=======
+            string conString = "Data Source = practicaaworks.database.windows.net; Initial Catalog = salesAW; User Id = patron; Password = Holacomoestas_123;";
+            SqlConnection con = new SqlConnection(conString);
+            con.Open();
+            string testString = "select * from Sales.SalesOrderHeader";
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(testString, con);
+            DataSet dataSet = new DataSet();
+            dataAdapter.Fill(dataSet, "Salida");
+            con.Close();
+            dataGridView1.DataSource = dataSet;
+            dataGridView1.DataMember = "Salida";
+>>>>>>> 21ed72e51736e431e4a59f04b876e91d981d3cdc
 
 
         }
@@ -193,6 +209,7 @@ namespace ProyectoFrag
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             var index = comboBox1.SelectedIndex;
             switch (index){
 
@@ -253,6 +270,8 @@ namespace ProyectoFrag
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+=======
+>>>>>>> 21ed72e51736e431e4a59f04b876e91d981d3cdc
 
         }
     }
