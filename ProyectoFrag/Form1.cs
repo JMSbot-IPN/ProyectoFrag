@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using System;
 using System.Data;
 
 namespace ProyectoFrag
@@ -18,10 +19,12 @@ namespace ProyectoFrag
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string conString = "Data Source = practicaaworks.database.windows.net; Initial Catalog = salesAW; User Id = patron; Password = Holacomoestas_123;";
+            string conString = "Data Source = practicaaworks.database.windows.net; Initial Catalog = productionAW; User Id = patron; Password = Holacomoestas_123;";
             SqlConnection con = new SqlConnection(conString);
             con.Open();
             var index = comboBox1.SelectedIndex;
+            DataTable dt = new DataTable();
+
             switch (index)
             {
                 case 0:
@@ -31,12 +34,17 @@ namespace ProyectoFrag
                     }
                     else
                     {
-                        string testString0 = "select * from Sales.SalesOrderHeader";
-                        SqlDataAdapter dataAdapter0 = new SqlDataAdapter(testString0, con);
-                        DataSet dataSet0 = new DataSet();
-                        dataAdapter0.Fill(dataSet0, "Salida");
-                        dataGridView1.DataSource = dataSet0;
-                        dataGridView1.DataMember = "Salida";
+                        //Consulta A
+                        
+                        SqlCommand spA = new SqlCommand("sp_consulta_A", con);
+                        spA.CommandType = CommandType.StoredProcedure;
+                        spA.Parameters.AddWithValue("@cat",textBox1.Text);
+                        
+                        SqlDataAdapter dataAdapter0 = new SqlDataAdapter(spA);
+
+                        dataAdapter0.Fill(dt);
+                        dataGridView1.DataSource = dt;
+
                     }
                     break;
 
@@ -47,12 +55,15 @@ namespace ProyectoFrag
                     }
                     else
                     {
-                        string testString1 = "select * from Sales.SalesOrderHeader";
-                        SqlDataAdapter dataAdapter1 = new SqlDataAdapter(testString1, con);
-                        DataSet dataSet1 = new DataSet();
-                        dataAdapter1.Fill(dataSet1, "Salida");
-                        dataGridView1.DataSource = dataSet1;
+                        //Consulta B
+                        /*
+                        string testString2 = "select * from Sales.SalesOrderHeader";
+                        SqlDataAdapter dataAdapter2 = new SqlDataAdapter(testString2, con);
+                        DataSet dataSet2 = new DataSet();
+                        dataAdapter2.Fill(dataSet2, "Salida");
+                        dataGridView1.DataSource = dataSet2;
                         dataGridView1.DataMember = "Salida";
+                        */
                     }
                     break;
 
@@ -63,12 +74,17 @@ namespace ProyectoFrag
                     }
                     else
                     {
-                        string testString2 = "select * from Sales.SalesOrderHeader";
-                        SqlDataAdapter dataAdapter2 = new SqlDataAdapter(testString2, con);
-                        DataSet dataSet2 = new DataSet();
-                        dataAdapter2.Fill(dataSet2, "Salida");
-                        dataGridView1.DataSource = dataSet2;
-                        dataGridView1.DataMember = "Salida";
+                        //Consulta C
+
+                        SqlCommand spC = new SqlCommand("sp_consulta_C", con);
+                        spC.CommandType = CommandType.StoredProcedure;
+                        spC.Parameters.AddWithValue("@cat", textBox1.Text);
+                        spC.Parameters.AddWithValue("@loc", textBox2.Text);
+
+                        SqlDataAdapter dataAdapter2 = new SqlDataAdapter(spC);
+
+                        dataAdapter2.Fill(dt);
+                        dataGridView1.DataSource = dt;
                     }
                     break;
 
@@ -79,12 +95,16 @@ namespace ProyectoFrag
                     }
                     else
                     {
-                        string testString3 = "select * from Sales.SalesOrderHeader";
-                        SqlDataAdapter dataAdapter3 = new SqlDataAdapter(testString3, con);
-                        DataSet dataSet3 = new DataSet();
-                        dataAdapter3.Fill(dataSet3, "Salida");
-                        dataGridView1.DataSource = dataSet3;
-                        dataGridView1.DataMember = "Salida";
+                        //Consulta D
+
+                        SqlCommand spD = new SqlCommand("sp_consulta_D", con);
+                        spD.CommandType = CommandType.StoredProcedure;
+                        spD.Parameters.AddWithValue("@cat", textBox1.Text);
+
+                        SqlDataAdapter dataAdapter3 = new SqlDataAdapter(spD);
+
+                        dataAdapter3.Fill(dt);
+                        dataGridView1.DataSource = dt;
                     }
                     break;
 
@@ -95,12 +115,17 @@ namespace ProyectoFrag
                     }
                     else
                     {
-                        string testString4 = "select * from Sales.SalesOrderHeader";
-                        SqlDataAdapter dataAdapter4 = new SqlDataAdapter(testString4, con);
-                        DataSet dataSet4 = new DataSet();
-                        dataAdapter4.Fill(dataSet4, "Salida");
-                        dataGridView1.DataSource = dataSet4;
-                        dataGridView1.DataMember = "Salida";
+                        //Consulta E
+
+                        SqlCommand spE = new SqlCommand("sp_consulta_E", con);
+                        spE.CommandType = CommandType.StoredProcedure;
+                        spE.Parameters.AddWithValue("@qty", textBox1.Text);
+                        spE.Parameters.AddWithValue("@Order", textBox2.Text);
+
+                        SqlDataAdapter dataAdapter4 = new SqlDataAdapter(spE);
+
+                        dataAdapter4.Fill(dt);
+                        dataGridView1.DataSource = dt;
                     }
                     break;
 
@@ -111,12 +136,17 @@ namespace ProyectoFrag
                     }
                     else
                     {
-                        string testString5 = "select * from Sales.SalesOrderHeader";
-                        SqlDataAdapter dataAdapter5 = new SqlDataAdapter(testString5, con);
-                        DataSet dataSet5 = new DataSet();
-                        dataAdapter5.Fill(dataSet5, "Salida");
-                        dataGridView1.DataSource = dataSet5;
-                        dataGridView1.DataMember = "Salida";
+                        //Consulta F
+
+                        SqlCommand spF = new SqlCommand("sp_consulta_F", con);
+                        spF.CommandType = CommandType.StoredProcedure;
+                        spF.Parameters.AddWithValue("@envio", textBox1.Text);
+                        spF.Parameters.AddWithValue("@Order", textBox2.Text);
+
+                        SqlDataAdapter dataAdapter5 = new SqlDataAdapter(spF);
+
+                        dataAdapter5.Fill(dt);
+                        dataGridView1.DataSource = dt;
                     }
                     break;
 
@@ -127,22 +157,39 @@ namespace ProyectoFrag
                     }
                     else
                     {
-                        string testString6 = "select * from Sales.SalesOrderHeader";
-                        SqlDataAdapter dataAdapter6 = new SqlDataAdapter(testString6, con);
-                        DataSet dataSet6 = new DataSet();
-                        dataAdapter6.Fill(dataSet6, "Salida");
-                        dataGridView1.DataSource = dataSet6;
-                        dataGridView1.DataMember = "Salida";
+                        //Consulta G
+                        string[] aux = textBox2.Text.Split(' ');
+                        if (aux.Length != 2)
+                        {
+                            MessageBox.Show("Por favor escriba un nombre y un apellido");
+                        }
+                        else
+                        {
+                            SqlCommand spG = new SqlCommand("sp_consulta_G", con);
+                            spG.CommandType = CommandType.StoredProcedure;
+                            spG.Parameters.AddWithValue("@fName", aux[0]);
+                            spG.Parameters.AddWithValue("@lName", aux[1]);
+                            spG.Parameters.AddWithValue("@correo", textBox1.Text);
+
+                            SqlDataAdapter dataAdapter6 = new SqlDataAdapter(spG);
+
+                            dataAdapter6.Fill(dt);
+                            dataGridView1.DataSource = dt;
+                        }
+
                     }
                     break;
 
                 case 7:
-                    string testString7 = "select * from Sales.SalesOrderHeader";
-                    SqlDataAdapter dataAdapter7 = new SqlDataAdapter(testString7, con);
-                    DataSet dataSet7 = new DataSet();
-                    dataAdapter7.Fill(dataSet7, "Salida");
-                    dataGridView1.DataSource = dataSet7;
-                    dataGridView1.DataMember = "Salida";
+                    //Consulta H
+
+                    SqlCommand spH = new SqlCommand("sp_consulta_H", con);
+                    spH.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter dataAdapter7 = new SqlDataAdapter(spH);
+
+                    dataAdapter7.Fill(dt);
+                    dataGridView1.DataSource = dt;
                     break;
 
                 case 8:
@@ -152,12 +199,16 @@ namespace ProyectoFrag
                     }
                     else
                     {
-                        string testString8 = "select * from Sales.SalesOrderHeader";
-                        SqlDataAdapter dataAdapter8 = new SqlDataAdapter(testString8, con);
-                        DataSet dataSet8 = new DataSet();
-                        dataAdapter8.Fill(dataSet8, "Salida");
-                        dataGridView1.DataSource = dataSet8;
-                        dataGridView1.DataMember = "Salida";
+                        //Consulta I
+                        SqlCommand spI = new SqlCommand("sp_consulta_I", con);
+                        spI.CommandType = CommandType.StoredProcedure;
+                        spI.Parameters.AddWithValue("@fechaEntrada", textBox1.Text);
+                        spI.Parameters.AddWithValue("@fechaSalida", textBox2.Text);
+
+                        SqlDataAdapter dataAdapter8 = new SqlDataAdapter(spI);
+
+                        dataAdapter8.Fill(dt);
+                        dataGridView1.DataSource = dt;
                     }
                     break;
 
@@ -168,12 +219,15 @@ namespace ProyectoFrag
                     }
                     else
                     {
+                        //Consulta J
+                        /*
                         string testString9 = "select * from Sales.SalesOrderHeader";
                         SqlDataAdapter dataAdapter9 = new SqlDataAdapter(testString9, con);
                         DataSet dataSet9 = new DataSet();
                         dataAdapter9.Fill(dataSet9, "Salida");
                         dataGridView1.DataSource = dataSet9;
                         dataGridView1.DataMember = "Salida";
+                        */
                     }
                     break;
 
@@ -196,53 +250,63 @@ namespace ProyectoFrag
             switch (index){
 
                 case 0:
-                    textBox1.PlaceholderText = "Escriba el producto a buscar";
+                    //Consulta A
+                    textBox1.PlaceholderText = "Escriba el ID de la categoria deseada";
                     textBox2.PlaceholderText = "No introduzca ningun parametro";    
                 break;
                 
                 case 1:
-                    textBox1.PlaceholderText = "Escriba el producto a buscar";
+                    //Consulta B
+                    textBox1.PlaceholderText = "Escriba el ID del producto deseado";
                     textBox2.PlaceholderText = "No introduzca ningun parametro";
                 break;
 
                 case 2:
-                    textBox1.PlaceholderText = "Escriba el producto a buscar";
-                    textBox2.PlaceholderText = "Escriba la localidad a buscar";
+                    //Consulta C
+                    textBox1.PlaceholderText = "Escriba el ID del producto a actualizar";
+                    textBox2.PlaceholderText = "Escriba el ID de la localidad deseada";
                 break;
                     
                 case 3:
-                    textBox1.PlaceholderText = "Escriba el nombre del cliente a buscar";
+                    //Consulta D
+                    textBox1.PlaceholderText = "Escriba el ID del territorio deseado";
                     textBox2.PlaceholderText = "No introduzca ningun parametro";
                 break;
 
                 case 4:
+                    //Consulta E
                     textBox1.PlaceholderText = "Escriba la nueva cantidad del producto";
-                    textBox2.PlaceholderText = "Escriba el producto a actualizar";
+                    textBox2.PlaceholderText = "Escriba el ID del producto a actualizar";
                 break;
 
                 case 5:
-                    textBox1.PlaceholderText = "Escriba el nuevo metodo de envio";
-                    textBox2.PlaceholderText = "Escriba la orden a actualizar";
+                    //Consulta F
+                    textBox1.PlaceholderText = "Escriba el ID del nuevo metodo de envio";
+                    textBox2.PlaceholderText = "Escriba el ID de la orden a actualizar";
                 break;
 
                 case 6:
+                    //Consulta G
                     textBox1.PlaceholderText = "Escriba el nuevo e-mail del cliente";
-                    textBox2.PlaceholderText = "Escriba el nombre del cliente a actualizar";
+                    textBox2.PlaceholderText = "Escriba el nombre completo del cliente";
                 break;
 
                 case 7:
+                    //Consulta H
                     textBox1.PlaceholderText = "No introduzca ningun parametro";
                     textBox2.PlaceholderText = "No introduzca ningun parametro";
                 break;
 
                 case 8:
-                    textBox1.PlaceholderText = "limite inferior del rango de fecha (AAAA/MM/DD)";
-                    textBox2.PlaceholderText = "limite superior del rango de fecha (AAAA/MM/DD)";
+                    //Consulta I
+                    textBox1.PlaceholderText = "limite inferior del rango de fecha (AAAA-MM-DD)";
+                    textBox2.PlaceholderText = "limite superior del rango de fecha (AAAA-MM-DD)";
                     break;
 
                 case 9:
-                    textBox1.PlaceholderText = "limite inferior del rango de fecha (AAAA/MM/DD)";
-                    textBox2.PlaceholderText = "limite superior del rango de fecha (AAAA/MM/DD)";
+                    //Consulta J
+                    textBox1.PlaceholderText = "limite inferior del rango de fecha (AAAA-MM-DD)";
+                    textBox2.PlaceholderText = "limite superior del rango de fecha (AAAA-MM-DD)";
                 break;
 
                 default:

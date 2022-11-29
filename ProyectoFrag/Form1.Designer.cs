@@ -60,16 +60,19 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "a)",
+            "a) Determinarel total de las ventas de los productos de la categoría deseada.",
             "b)",
-            "c)",
-            "d)",
-            "e)",
-            "f)",
-            "g)",
-            "h)",
-            "i)",
-            "j)"});
+            "c) Actualizar el stock disponible en un 5% de los productos de la categoría desea" +
+                "da.",
+            "d) Determinar si hay clientes de un territorio deseado que realizan ordenes en te" +
+                "rritorios diferentes al que se encuentran.",
+            "e) Actualizar  la  cantidad  de  productos  de  una  orden deseada.",
+            "f) Actualizar el método de envío de una orden deseada.",
+            "g) Actualizar el correo electrónico de una cliente deseado.",
+            "h) Determinar el empleado que atendió más ordenes por territorio/región.",
+            "i) Determinar paraun rango de fechas desadas, cual es el total de las ventasen ca" +
+                "da una de las regiones.",
+            "j) "});
             this.comboBox1.Location = new System.Drawing.Point(12, 25);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(571, 23);
