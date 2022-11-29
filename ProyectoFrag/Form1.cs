@@ -56,14 +56,15 @@ namespace ProyectoFrag
                     else
                     {
                         //Consulta B
-                        /*
-                        string testString2 = "select * from Sales.SalesOrderHeader";
-                        SqlDataAdapter dataAdapter2 = new SqlDataAdapter(testString2, con);
-                        DataSet dataSet2 = new DataSet();
-                        dataAdapter2.Fill(dataSet2, "Salida");
-                        dataGridView1.DataSource = dataSet2;
-                        dataGridView1.DataMember = "Salida";
-                        */
+
+                        //SqlCommand spB = new SqlCommand("sp_consulta_B", con);
+                        //spB.CommandType = CommandType.StoredProcedure;
+                        //spB.Parameters.AddWithValue("@cat", textBox1.Text);
+
+                        //SqlDataAdapter dataAdapter0 = new SqlDataAdapter(spB);
+
+                        //dataAdapter0.Fill(dt);
+                        //dataGridView1.DataSource = dt;
                     }
                     break;
 
@@ -220,14 +221,16 @@ namespace ProyectoFrag
                     else
                     {
                         //Consulta J
-                        /*
-                        string testString9 = "select * from Sales.SalesOrderHeader";
-                        SqlDataAdapter dataAdapter9 = new SqlDataAdapter(testString9, con);
-                        DataSet dataSet9 = new DataSet();
-                        dataAdapter9.Fill(dataSet9, "Salida");
-                        dataGridView1.DataSource = dataSet9;
-                        dataGridView1.DataMember = "Salida";
-                        */
+
+                        //SqlCommand spI = new SqlCommand("sp_consulta_J", con);
+                        //spI.CommandType = CommandType.StoredProcedure;
+                        //spI.Parameters.AddWithValue("@fechaEntrada", textBox1.Text);
+                        //spI.Parameters.AddWithValue("@fechaSalida", textBox2.Text);
+
+                        //SqlDataAdapter dataAdapter8 = new SqlDataAdapter(spI);
+
+                        //dataAdapter8.Fill(dt);
+                        //dataGridView1.DataSource = dt;
                     }
                     break;
 
