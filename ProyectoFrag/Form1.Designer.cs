@@ -33,13 +33,14 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 70);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 41);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(1240, 599);
@@ -48,7 +49,7 @@
             // button1
             // 
             this.button1.AutoSize = true;
-            this.button1.Location = new System.Drawing.Point(1121, 25);
+            this.button1.Location = new System.Drawing.Point(1121, 645);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(131, 25);
             this.button1.TabIndex = 1;
@@ -61,7 +62,7 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "a) Determinarel total de las ventas de los productos de la categoría deseada.",
-            "b)",
+            "b) Determinar el producto mas solicitado de la region deseada",
             "c) Actualizar el stock disponible en un 5% de los productos de la categoría desea" +
                 "da.",
             "d) Determinar si hay clientes de un territorio deseado que realizan ordenes en te" +
@@ -73,7 +74,7 @@
             "i) Determinar paraun rango de fechas desadas, cual es el total de las ventasen ca" +
                 "da una de las regiones.",
             "j) "});
-            this.comboBox1.Location = new System.Drawing.Point(12, 25);
+            this.comboBox1.Location = new System.Drawing.Point(12, 646);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(571, 23);
             this.comboBox1.TabIndex = 3;
@@ -82,7 +83,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(589, 25);
+            this.textBox1.Location = new System.Drawing.Point(589, 646);
             this.textBox1.Name = "textBox1";
             this.textBox1.PlaceholderText = "No introduzca ningun parametro";
             this.textBox1.Size = new System.Drawing.Size(260, 23);
@@ -91,11 +92,25 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(855, 25);
+            this.textBox2.Location = new System.Drawing.Point(855, 646);
             this.textBox2.Name = "textBox2";
             this.textBox2.PlaceholderText = "No introduzca ningun parametro";
             this.textBox2.Size = new System.Drawing.Size(260, 23);
             this.textBox2.TabIndex = 5;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Server: PC03-LABTELE2 salesAW",
+            "Server: PC04-LABTELE2 productionAW",
+            "Server: PC14-LABTELE2 otherAW"});
+            this.comboBox2.Location = new System.Drawing.Point(12, 12);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(1240, 23);
+            this.comboBox2.TabIndex = 6;
+            this.comboBox2.Text = "Seleccione un servidor al que conectarse";
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -103,6 +118,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox1);
@@ -126,6 +142,6 @@
 
         private TextBox textBox1;
         private TextBox textBox2;
-
+        private ComboBox comboBox2;
     }
 }

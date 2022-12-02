@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using ProyectoFrag;
 using System;
 using System.Data;
 
@@ -18,226 +19,234 @@ namespace ProyectoFrag
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            string conString = "Data Source = practicaaworks.database.windows.net; Initial Catalog = productionAW; User Id = patron; Password = Holacomoestas_123;";
-            SqlConnection con = new SqlConnection(conString);
-            con.Open();
-            var index = comboBox1.SelectedIndex;
-            DataTable dt = new DataTable();
-
-            switch (index)
+            
+            if (comboBox2.SelectedIndex < 0)
             {
-                case 0:
-                    if (textBox1.Text.Equals(""))
-                    {
-                        MessageBox.Show("Por favor rellene los parametros especificados");
-                    }
-                    else
-                    {
-                        //Consulta A
-                        
-                        SqlCommand spA = new SqlCommand("sp_consulta_A", con);
-                        spA.CommandType = CommandType.StoredProcedure;
-                        spA.Parameters.AddWithValue("@cat",textBox1.Text);
-                        
-                        SqlDataAdapter dataAdapter0 = new SqlDataAdapter(spA);
+                MessageBox.Show("Por favor elija un servidor al que conectarse");
+            }
+            else
+            {
+                string[] instance = comboBox2.Text.Split(' ');
+                string conString = $"Data Source = {instance[1]}; Initial Catalog = {instance[2]}; User Id = alumno; Password = Estudiante; TrustServerCertificate = true;";
+                SqlConnection con = new SqlConnection(conString);
+                con.Open();
+                var index = comboBox1.SelectedIndex;
+                DataTable dt = new DataTable();
 
-                        dataAdapter0.Fill(dt);
-                        dataGridView1.DataSource = dt;
-
-                    }
-                    break;
-
-                case 1:
-                    if (textBox1.Text.Equals(""))
-                    {
-                        MessageBox.Show("Por favor rellene los parametros especificados");
-                    }
-                    else
-                    {
-                        //Consulta B
-
-                        //SqlCommand spB = new SqlCommand("sp_consulta_B", con);
-                        //spB.CommandType = CommandType.StoredProcedure;
-                        //spB.Parameters.AddWithValue("@cat", textBox1.Text);
-
-                        //SqlDataAdapter dataAdapter0 = new SqlDataAdapter(spB);
-
-                        //dataAdapter0.Fill(dt);
-                        //dataGridView1.DataSource = dt;
-                    }
-                    break;
-
-                case 2:
-                    if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
-                    {
-                        MessageBox.Show("Por favor rellene los parametros especificados");
-                    }
-                    else
-                    {
-                        //Consulta C
-
-                        SqlCommand spC = new SqlCommand("sp_consulta_C", con);
-                        spC.CommandType = CommandType.StoredProcedure;
-                        spC.Parameters.AddWithValue("@cat", textBox1.Text);
-                        spC.Parameters.AddWithValue("@loc", textBox2.Text);
-
-                        SqlDataAdapter dataAdapter2 = new SqlDataAdapter(spC);
-
-                        dataAdapter2.Fill(dt);
-                        dataGridView1.DataSource = dt;
-                    }
-                    break;
-
-                case 3:
-                    if (textBox1.Text.Equals(""))
-                    {
-                        MessageBox.Show("Por favor rellene los parametros especificados");
-                    }
-                    else
-                    {
-                        //Consulta D
-
-                        SqlCommand spD = new SqlCommand("sp_consulta_D", con);
-                        spD.CommandType = CommandType.StoredProcedure;
-                        spD.Parameters.AddWithValue("@cat", textBox1.Text);
-
-                        SqlDataAdapter dataAdapter3 = new SqlDataAdapter(spD);
-
-                        dataAdapter3.Fill(dt);
-                        dataGridView1.DataSource = dt;
-                    }
-                    break;
-
-                case 4:
-                    if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
-                    {
-                        MessageBox.Show("Por favor rellene los parametros especificados");
-                    }
-                    else
-                    {
-                        //Consulta E
-
-                        SqlCommand spE = new SqlCommand("sp_consulta_E", con);
-                        spE.CommandType = CommandType.StoredProcedure;
-                        spE.Parameters.AddWithValue("@qty", textBox1.Text);
-                        spE.Parameters.AddWithValue("@Order", textBox2.Text);
-
-                        SqlDataAdapter dataAdapter4 = new SqlDataAdapter(spE);
-
-                        dataAdapter4.Fill(dt);
-                        dataGridView1.DataSource = dt;
-                    }
-                    break;
-
-                case 5:
-                    if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
-                    {
-                        MessageBox.Show("Por favor rellene los parametros especificados");
-                    }
-                    else
-                    {
-                        //Consulta F
-
-                        SqlCommand spF = new SqlCommand("sp_consulta_F", con);
-                        spF.CommandType = CommandType.StoredProcedure;
-                        spF.Parameters.AddWithValue("@envio", textBox1.Text);
-                        spF.Parameters.AddWithValue("@Order", textBox2.Text);
-
-                        SqlDataAdapter dataAdapter5 = new SqlDataAdapter(spF);
-
-                        dataAdapter5.Fill(dt);
-                        dataGridView1.DataSource = dt;
-                    }
-                    break;
-
-                case 6:
-                    if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
-                    {
-                        MessageBox.Show("Por favor rellene los parametros especificados");
-                    }
-                    else
-                    {
-                        //Consulta G
-                        string[] aux = textBox2.Text.Split(' ');
-                        if (aux.Length != 2)
+                switch (index)
+                {
+                    case 0:
+                        if (textBox1.Text.Equals(""))
                         {
-                            MessageBox.Show("Por favor escriba un nombre y un apellido");
+                            MessageBox.Show("Por favor rellene los parametros especificados");
                         }
                         else
                         {
-                            SqlCommand spG = new SqlCommand("sp_consulta_G", con);
-                            spG.CommandType = CommandType.StoredProcedure;
-                            spG.Parameters.AddWithValue("@fName", aux[0]);
-                            spG.Parameters.AddWithValue("@lName", aux[1]);
-                            spG.Parameters.AddWithValue("@correo", textBox1.Text);
+                            //Consulta A
 
-                            SqlDataAdapter dataAdapter6 = new SqlDataAdapter(spG);
+                            SqlCommand spA = new SqlCommand("sp_consulta_A", con);
+                            spA.CommandType = CommandType.StoredProcedure;
+                            spA.Parameters.AddWithValue("@cat", textBox1.Text);
 
-                            dataAdapter6.Fill(dt);
+                            SqlDataAdapter dataAdapter0 = new SqlDataAdapter(spA);
+
+                            dataAdapter0.Fill(dt);
+                            dataGridView1.DataSource = dt;
+
+                        }
+                        break;
+
+                    case 1:
+                        if (textBox1.Text.Equals(""))
+                        {
+                            MessageBox.Show("Por favor rellene los parametros especificados");
+                        }
+                        else
+                        {
+                            //Consulta B
+
+                            SqlCommand spB = new SqlCommand("sp_consulta_B", con);
+                            spB.CommandType = CommandType.StoredProcedure;
+                            spB.Parameters.AddWithValue("@region", textBox1.Text);
+
+                            SqlDataAdapter dataAdapter0 = new SqlDataAdapter(spB);
+
+                            dataAdapter0.Fill(dt);
                             dataGridView1.DataSource = dt;
                         }
+                        break;
 
-                    }
-                    break;
+                    case 2:
+                        if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
+                        {
+                            MessageBox.Show("Por favor rellene los parametros especificados");
+                        }
+                        else
+                        {
+                            //Consulta C
 
-                case 7:
-                    //Consulta H
+                            SqlCommand spC = new SqlCommand("sp_consulta_C", con);
+                            spC.CommandType = CommandType.StoredProcedure;
+                            spC.Parameters.AddWithValue("@cat", textBox1.Text);
+                            spC.Parameters.AddWithValue("@loc", textBox2.Text);
 
-                    SqlCommand spH = new SqlCommand("sp_consulta_H", con);
-                    spH.CommandType = CommandType.StoredProcedure;
+                            SqlDataAdapter dataAdapter2 = new SqlDataAdapter(spC);
 
-                    SqlDataAdapter dataAdapter7 = new SqlDataAdapter(spH);
+                            dataAdapter2.Fill(dt);
+                            dataGridView1.DataSource = dt;
+                        }
+                        break;
 
-                    dataAdapter7.Fill(dt);
-                    dataGridView1.DataSource = dt;
-                    break;
+                    case 3:
+                        if (textBox1.Text.Equals(""))
+                        {
+                            MessageBox.Show("Por favor rellene los parametros especificados");
+                        }
+                        else
+                        {
+                            //Consulta D
 
-                case 8:
-                    if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
-                    {
-                        MessageBox.Show("Por favor rellene los parametros especificados");
-                    }
-                    else
-                    {
-                        //Consulta I
-                        SqlCommand spI = new SqlCommand("sp_consulta_I", con);
-                        spI.CommandType = CommandType.StoredProcedure;
-                        spI.Parameters.AddWithValue("@fechaEntrada", textBox1.Text);
-                        spI.Parameters.AddWithValue("@fechaSalida", textBox2.Text);
+                            SqlCommand spD = new SqlCommand("sp_consulta_D", con);
+                            spD.CommandType = CommandType.StoredProcedure;
+                            spD.Parameters.AddWithValue("@cat", textBox1.Text);
 
-                        SqlDataAdapter dataAdapter8 = new SqlDataAdapter(spI);
+                            SqlDataAdapter dataAdapter3 = new SqlDataAdapter(spD);
 
-                        dataAdapter8.Fill(dt);
+                            dataAdapter3.Fill(dt);
+                            dataGridView1.DataSource = dt;
+                        }
+                        break;
+
+                    case 4:
+                        if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
+                        {
+                            MessageBox.Show("Por favor rellene los parametros especificados");
+                        }
+                        else
+                        {
+                            //Consulta E
+
+                            SqlCommand spE = new SqlCommand("sp_consulta_E", con);
+                            spE.CommandType = CommandType.StoredProcedure;
+                            spE.Parameters.AddWithValue("@qty", textBox1.Text);
+                            spE.Parameters.AddWithValue("@Order", textBox2.Text);
+
+                            SqlDataAdapter dataAdapter4 = new SqlDataAdapter(spE);
+
+                            dataAdapter4.Fill(dt);
+                            dataGridView1.DataSource = dt;
+                        }
+                        break;
+
+                    case 5:
+                        if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
+                        {
+                            MessageBox.Show("Por favor rellene los parametros especificados");
+                        }
+                        else
+                        {
+                            //Consulta F
+
+                            SqlCommand spF = new SqlCommand("sp_consulta_F", con);
+                            spF.CommandType = CommandType.StoredProcedure;
+                            spF.Parameters.AddWithValue("@envio", textBox1.Text);
+                            spF.Parameters.AddWithValue("@Order", textBox2.Text);
+
+                            SqlDataAdapter dataAdapter5 = new SqlDataAdapter(spF);
+
+                            dataAdapter5.Fill(dt);
+                            dataGridView1.DataSource = dt;
+                        }
+                        break;
+
+                    case 6:
+                        if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
+                        {
+                            MessageBox.Show("Por favor rellene los parametros especificados");
+                        }
+                        else
+                        {
+                            //Consulta G
+                            string[] aux = textBox2.Text.Split(' ');
+                            if (aux.Length != 2)
+                            {
+                                MessageBox.Show("Por favor escriba un nombre y un apellido");
+                            }
+                            else
+                            {
+                                SqlCommand spG = new SqlCommand("sp_consulta_G", con);
+                                spG.CommandType = CommandType.StoredProcedure;
+                                spG.Parameters.AddWithValue("@fName", aux[0]);
+                                spG.Parameters.AddWithValue("@lName", aux[1]);
+                                spG.Parameters.AddWithValue("@correo", textBox1.Text);
+
+                                SqlDataAdapter dataAdapter6 = new SqlDataAdapter(spG);
+
+                                dataAdapter6.Fill(dt);
+                                dataGridView1.DataSource = dt;
+                            }
+
+                        }
+                        break;
+
+                    case 7:
+                        //Consulta H
+
+                        SqlCommand spH = new SqlCommand("sp_consulta_H", con);
+                        spH.CommandType = CommandType.StoredProcedure;
+
+                        SqlDataAdapter dataAdapter7 = new SqlDataAdapter(spH);
+
+                        dataAdapter7.Fill(dt);
                         dataGridView1.DataSource = dt;
-                    }
-                    break;
+                        break;
 
-                case 9:
-                    if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
-                    {
-                        MessageBox.Show("Por favor rellene los parametros especificados");
-                    }
-                    else
-                    {
-                        //Consulta J
+                    case 8:
+                        if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
+                        {
+                            MessageBox.Show("Por favor rellene los parametros especificados");
+                        }
+                        else
+                        {
+                            //Consulta I
+                            SqlCommand spI = new SqlCommand("sp_consulta_I", con);
+                            spI.CommandType = CommandType.StoredProcedure;
+                            spI.Parameters.AddWithValue("@fechaEntrada", textBox1.Text);
+                            spI.Parameters.AddWithValue("@fechaSalida", textBox2.Text);
 
-                        //SqlCommand spI = new SqlCommand("sp_consulta_J", con);
-                        //spI.CommandType = CommandType.StoredProcedure;
-                        //spI.Parameters.AddWithValue("@fechaEntrada", textBox1.Text);
-                        //spI.Parameters.AddWithValue("@fechaSalida", textBox2.Text);
+                            SqlDataAdapter dataAdapter8 = new SqlDataAdapter(spI);
 
-                        //SqlDataAdapter dataAdapter8 = new SqlDataAdapter(spI);
+                            dataAdapter8.Fill(dt);
+                            dataGridView1.DataSource = dt;
+                        }
+                        break;
 
-                        //dataAdapter8.Fill(dt);
-                        //dataGridView1.DataSource = dt;
-                    }
-                    break;
+                    case 9:
+                        if (textBox1.Text.Equals("") || textBox2.Text.Equals(""))
+                        {
+                            MessageBox.Show("Por favor rellene los parametros especificados");
+                        }
+                        else
+                        {
+                            //Consulta J
 
-                default:
-                break;
+                            //SqlCommand spI = new SqlCommand("sp_consulta_J", con);
+                            //spI.CommandType = CommandType.StoredProcedure;
+                            //spI.Parameters.AddWithValue("@fechaEntrada", textBox1.Text);
+                            //spI.Parameters.AddWithValue("@fechaSalida", textBox2.Text);
+
+                            //SqlDataAdapter dataAdapter8 = new SqlDataAdapter(spI);
+
+                            //dataAdapter8.Fill(dt);
+                            //dataGridView1.DataSource = dt;
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+                con.Close();
             }
-            con.Close();
 
         }
 
@@ -318,6 +327,11 @@ namespace ProyectoFrag
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
