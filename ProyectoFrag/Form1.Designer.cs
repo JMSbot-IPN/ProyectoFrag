@@ -102,9 +102,9 @@
             // 
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
-            "Server: PC03-LABTELE2 salesAW",
-            "Server: PC04-LABTELE2 productionAW",
-            "Server: PC14-LABTELE2 otherAW"});
+            "Server: PC20-LABTELE2 salesAW",
+            "Server: PC21-LABTELE2 productionAW",
+            "Server: PC22-LABTELE2 otherAW"});
             this.comboBox2.Location = new System.Drawing.Point(12, 12);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(1240, 23);

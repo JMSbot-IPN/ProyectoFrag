@@ -19,24 +19,27 @@ namespace ProyectoFrag
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            if (comboBox2.SelectedIndex < 0)
+
+
+
+            if (comboBox2.SelectedIndex < 0) //Checa si el usuario selecciono algun servidor al que conectarse
             {
                 MessageBox.Show("Por favor elija un servidor al que conectarse");
             }
             else
             {
-                string[] instance = comboBox2.Text.Split(' ');
+                string[] instance = comboBox2.Text.Split(' '); //Como el nombre es constante lo asilamos para la connectionString
+                //Utilizando la biblioteca using SqlClient para la conexion a SQL Server, no se necesita nada mas
                 string conString = $"Data Source = {instance[1]}; Initial Catalog = {instance[2]}; User Id = alumno; Password = Estudiante; TrustServerCertificate = true;";
                 SqlConnection con = new SqlConnection(conString);
                 con.Open();
                 var index = comboBox1.SelectedIndex;
-                DataTable dt = new DataTable();
+                DataTable dt = new DataTable();//Tabla de datos que recive las consultas almacenadas
 
-                switch (index)
+                switch (index)//Checa que consulta almacenada eligio el usuario
                 {
                     case 0:
-                        if (textBox1.Text.Equals(""))
+                        if (textBox1.Text.Equals(""))//Checa si se llenaron los campos correctamente
                         {
                             MessageBox.Show("Por favor rellene los parametros especificados");
                         }
@@ -44,14 +47,20 @@ namespace ProyectoFrag
                         {
                             //Consulta A
 
-                            SqlCommand spA = new SqlCommand("sp_consulta_A", con);
-                            spA.CommandType = CommandType.StoredProcedure;
-                            spA.Parameters.AddWithValue("@cat", textBox1.Text);
+                            SqlCommand spA = new SqlCommand("sp_consulta_A", con);//Manda a llamar al procedimiento almacenado
+                            spA.CommandType = CommandType.StoredProcedure;//Declara el tipo de comando
+                            spA.Parameters.AddWithValue("@cat", textBox1.Text);//Llena los parametros solicitados con la informacion introducida
 
-                            SqlDataAdapter dataAdapter0 = new SqlDataAdapter(spA);
+                            SqlDataAdapter dataAdapter0 = new SqlDataAdapter(spA);//Se crea un adaptador para transformar los datos a algo compatible con la dataTable
 
-                            dataAdapter0.Fill(dt);
+                            dataAdapter0.Fill(dt);//Rellena la dataTable con los campos recividos desde SQL Server
+                            if (dt.Rows.Count < 1)//Checa si la dataTable esta vacia
+                            {
+                                MessageBox.Show("No se encontraron resultados de la consulta");
+                            }
+                            else
                             dataGridView1.DataSource = dt;
+                            //Se plasma la informacion recivida de SQL Server en la interfaz grafica por medio del elemento de dataGridView
 
                         }
                         break;
@@ -72,6 +81,11 @@ namespace ProyectoFrag
                             SqlDataAdapter dataAdapter0 = new SqlDataAdapter(spB);
 
                             dataAdapter0.Fill(dt);
+                            if (dt.Rows.Count < 1)
+                            {
+                                MessageBox.Show("No se encontraron resultados de la consulta");
+                            }
+                            else
                             dataGridView1.DataSource = dt;
                         }
                         break;
@@ -93,6 +107,11 @@ namespace ProyectoFrag
                             SqlDataAdapter dataAdapter2 = new SqlDataAdapter(spC);
 
                             dataAdapter2.Fill(dt);
+                            if (dt.Rows.Count < 1)
+                            {
+                                MessageBox.Show("No se encontraron resultados de la consulta");
+                            }
+                            else
                             dataGridView1.DataSource = dt;
                         }
                         break;
@@ -113,6 +132,11 @@ namespace ProyectoFrag
                             SqlDataAdapter dataAdapter3 = new SqlDataAdapter(spD);
 
                             dataAdapter3.Fill(dt);
+                            if (dt.Rows.Count < 1)
+                            {
+                                MessageBox.Show("No se encontraron resultados de la consulta");
+                            }
+                            else
                             dataGridView1.DataSource = dt;
                         }
                         break;
@@ -125,15 +149,21 @@ namespace ProyectoFrag
                         else
                         {
                             //Consulta E
-
+                            string[] aux = textBox2.Text.Split(' ');
                             SqlCommand spE = new SqlCommand("sp_consulta_E", con);
                             spE.CommandType = CommandType.StoredProcedure;
                             spE.Parameters.AddWithValue("@qty", textBox1.Text);
-                            spE.Parameters.AddWithValue("@Order", textBox2.Text);
+                            spE.Parameters.AddWithValue("@OrderId", aux[0]);
+                            spE.Parameters.AddWithValue("@producto", aux[1]);
 
                             SqlDataAdapter dataAdapter4 = new SqlDataAdapter(spE);
 
                             dataAdapter4.Fill(dt);
+                            if (dt.Rows.Count < 1)
+                            {
+                                MessageBox.Show("No se encontraron resultados de la consulta");
+                            }
+                            else
                             dataGridView1.DataSource = dt;
                         }
                         break;
@@ -155,6 +185,11 @@ namespace ProyectoFrag
                             SqlDataAdapter dataAdapter5 = new SqlDataAdapter(spF);
 
                             dataAdapter5.Fill(dt);
+                            if (dt.Rows.Count < 1)
+                            {
+                                MessageBox.Show("No se encontraron resultados de la consulta");
+                            }
+                            else
                             dataGridView1.DataSource = dt;
                         }
                         break;
@@ -183,6 +218,11 @@ namespace ProyectoFrag
                                 SqlDataAdapter dataAdapter6 = new SqlDataAdapter(spG);
 
                                 dataAdapter6.Fill(dt);
+                                if (dt.Rows.Count < 1)
+                                {
+                                    MessageBox.Show("No se encontraron resultados de la consulta");
+                                }
+                                else
                                 dataGridView1.DataSource = dt;
                             }
 
@@ -198,6 +238,11 @@ namespace ProyectoFrag
                         SqlDataAdapter dataAdapter7 = new SqlDataAdapter(spH);
 
                         dataAdapter7.Fill(dt);
+                        if (dt.Rows.Count < 1)
+                        {
+                            MessageBox.Show("No se encontraron resultados de la consulta");
+                        }
+                        else
                         dataGridView1.DataSource = dt;
                         break;
 
@@ -217,6 +262,11 @@ namespace ProyectoFrag
                             SqlDataAdapter dataAdapter8 = new SqlDataAdapter(spI);
 
                             dataAdapter8.Fill(dt);
+                            if (dt.Rows.Count < 1)
+                            {
+                                MessageBox.Show("No se encontraron resultados de la consulta");
+                            }
+                            else
                             dataGridView1.DataSource = dt;
                         }
                         break;
@@ -259,55 +309,56 @@ namespace ProyectoFrag
         {
 
             var index = comboBox1.SelectedIndex;
-            switch (index){
+            switch (index)
+            {
 
                 case 0:
                     //Consulta A
                     textBox1.PlaceholderText = "Escriba el ID de la categoria deseada";
-                    textBox2.PlaceholderText = "No introduzca ningun parametro";    
-                break;
-                
+                    textBox2.PlaceholderText = "No introduzca ningun parametro";
+                    break;
+
                 case 1:
                     //Consulta B
                     textBox1.PlaceholderText = "Escriba el ID del producto deseado";
                     textBox2.PlaceholderText = "No introduzca ningun parametro";
-                break;
+                    break;
 
                 case 2:
                     //Consulta C
                     textBox1.PlaceholderText = "Escriba el ID del producto a actualizar";
                     textBox2.PlaceholderText = "Escriba el ID de la localidad deseada";
-                break;
-                    
+                    break;
+
                 case 3:
                     //Consulta D
                     textBox1.PlaceholderText = "Escriba el ID del territorio deseado";
                     textBox2.PlaceholderText = "No introduzca ningun parametro";
-                break;
+                    break;
 
                 case 4:
                     //Consulta E
                     textBox1.PlaceholderText = "Escriba la nueva cantidad del producto";
                     textBox2.PlaceholderText = "Escriba el ID del producto a actualizar";
-                break;
+                    break;
 
                 case 5:
                     //Consulta F
                     textBox1.PlaceholderText = "Escriba el ID del nuevo metodo de envio";
                     textBox2.PlaceholderText = "Escriba el ID de la orden a actualizar";
-                break;
+                    break;
 
                 case 6:
                     //Consulta G
                     textBox1.PlaceholderText = "Escriba el nuevo e-mail del cliente";
                     textBox2.PlaceholderText = "Escriba el nombre completo del cliente";
-                break;
+                    break;
 
                 case 7:
                     //Consulta H
                     textBox1.PlaceholderText = "No introduzca ningun parametro";
                     textBox2.PlaceholderText = "No introduzca ningun parametro";
-                break;
+                    break;
 
                 case 8:
                     //Consulta I
@@ -319,10 +370,10 @@ namespace ProyectoFrag
                     //Consulta J
                     textBox1.PlaceholderText = "limite inferior del rango de fecha (AAAA-MM-DD)";
                     textBox2.PlaceholderText = "limite superior del rango de fecha (AAAA-MM-DD)";
-                break;
+                    break;
 
                 default:
-                break;
+                    break;
             }
         }
 
